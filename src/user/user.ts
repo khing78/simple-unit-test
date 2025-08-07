@@ -1,0 +1,21 @@
+import { HttpClient } from "./types";
+/**
+ * Fetches user profile data from the API.
+ * @param userId - The ID of the user to fetch.
+ * @param httpClient - An instance of HttpClient to make the request.
+ * @returns A promise that resolves to the user profile data.
+ */
+export interface UserProfile {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+}
+
+export async function fetchUserProfile(
+  userId: number,
+  httpClient: HttpClient
+): Promise<UserProfile> {
+  const res = await httpClient.get(`https://jsonplaceholder.typicode.com/users/${userId}`);
+  return res;
+}
