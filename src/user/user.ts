@@ -22,11 +22,15 @@ export async function fetchUserProfile(
 }
 
 export function isUserSameOrganize(user: UserProfile, organizationName: string): boolean {
-  return user.email.toLocaleLowerCase() === organizationName.toLocaleLowerCase();
+  const userDomain = user.email.split('@')[1]?.toLowerCase();
+  return userDomain === organizationName.toLowerCase();
 }
 
-export async function getUserSameOrganizeNest(userId: number): Promise<UserProfile> {
-  const user = await fetchUserProfile(userId, axiosHttpClient)
+export async function getUserSameOrganizeNest(
+  userId: number,
+  httpClient: HttpClient
+): Promise<UserProfile> {
+  const user = await fetchUserProfile(userId, httpClient);
   const organizationName = 'april.biz';
   const isSameOrganize = isUserSameOrganize(user, organizationName);
   if (!isSameOrganize) throw new Error('User does not belong to the specified organization');
