@@ -1,4 +1,3 @@
-
 // Final grade is summary of work, midterm, and final exam scores
 // A for total >= 80
 // B for total >= 70
