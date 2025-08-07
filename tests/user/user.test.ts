@@ -26,3 +26,9 @@ describe('fetchUserProfile', () => {
     expect(result).toEqual(fakeUser);
   });
 });
+
+//Add isUserSameOrganize test
+describe('isUserSameOrganize', () => { })
+
+//Add getUserSameOrganizeNest test
+describe('getUserSameOrganizeNest', () => { })

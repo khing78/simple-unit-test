@@ -1,3 +1,4 @@
+import { axiosHttpClient } from "./httpClient";
 import { HttpClient } from "./types";
 /**
  * Fetches user profile data from the API.
@@ -18,4 +19,17 @@ export async function fetchUserProfile(
 ): Promise<UserProfile> {
   const res = await httpClient.get(`https://jsonplaceholder.typicode.com/users/${userId}`);
   return res;
+}
+
+export function isUserSameOrganize(user: UserProfile, organizationName: string): boolean {
+  return user.email.toLocaleLowerCase() === organizationName.toLocaleLowerCase();
+}
+
+export async function getUserSameOrganizeNest(userId: number): Promise<UserProfile> {
+  const user = await fetchUserProfile(userId, axiosHttpClient)
+  const organizationName = 'april.biz';
+  const isSameOrganize = isUserSameOrganize(user, organizationName);
+  if (!isSameOrganize) throw new Error('User does not belong to the specified organization');
+  console.log(`Good morning agent ${user.name}, you are a member of the organization ${organizationName}`);
+  return user;
 }
