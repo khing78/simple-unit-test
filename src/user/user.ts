@@ -13,27 +13,33 @@ export interface UserProfile {
   email: string;
 }
 
-export async function fetchUserProfile(
-  userId: number,
-  httpClient: HttpClient
-): Promise<UserProfile> {
-  const res = await httpClient.get(`https://jsonplaceholder.typicode.com/users/${userId}`);
-  return res;
-}
-
 export function isUserSameOrganize(user: UserProfile, organizationName: string): boolean {
-  const userDomain = user.email.split('@')[1]?.toLowerCase();
-  return userDomain === organizationName.toLowerCase();
-}
+    const userDomain = user.email.split('@')[1]?.toLowerCase();
+    return userDomain === organizationName.toLowerCase();
+  }
 
-export async function getUserSameOrganizeNest(
-  userId: number,
-  httpClient: HttpClient
-): Promise<UserProfile> {
-  const user = await fetchUserProfile(userId, httpClient);
-  const organizationName = 'april.biz';
-  const isSameOrganize = isUserSameOrganize(user, organizationName);
-  if (!isSameOrganize) throw new Error('User does not belong to the specified organization');
-  console.log(`Good morning agent ${user.name}, you are a member of the organization ${organizationName}`);
-  return user;
+export function userService(httpClient: HttpClient) {
+  async function fetchUserProfile(
+    userId: number
+  ): Promise<UserProfile> {
+    const res = await httpClient.get(`https://jsonplaceholder.typicode.com/users/${userId}`);
+    return res;
+  }
+
+  async function getUserSameOrganize(
+    userId: number,
+  ): Promise<UserProfile> {
+    const user = await fetchUserProfile(userId);
+    const organizationName = 'april.biz';
+    const isSameOrganize = isUserSameOrganize(user, organizationName);
+    if (!isSameOrganize) throw new Error('User does not belong to the specified organization');
+    console.log(`Good morning agent ${user.name}, you are a member of the organization ${organizationName}`);
+    return user;
+  }
+
+  return {
+    fetchUserProfile,
+    isUserSameOrganize,
+    getUserSameOrganize,
+  }
 }

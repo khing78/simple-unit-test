@@ -93,9 +93,9 @@ describe('math.ts', () => {
     it('result contains the added value', () => {
       const arr = [1, 2, 3];
       const result = addToAllInPlace(arr, 5);
-      expect(result).toContain(6); // 1+5=6
-      expect(result).toContain(7); // 2+5=7
-      expect(result).toContain(8); // 3+5=8
+      expect(result).toContain(6);
+      expect(result).toContain(7);
+      expect(result).toContain(8);
     });
 
     it('result has correct length', () => {

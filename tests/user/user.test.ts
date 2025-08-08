@@ -1,6 +1,5 @@
 import { HttpClient } from "../../src/user/types";
-import { fetchUserProfile, getUserSameOrganizeNest, isUserSameOrganize, UserProfile } from "../../src/user/user";
-import * as userModule from  "../../src/user/user"
+import { userService, UserProfile, isUserSameOrganize } from "../../src/user/user";
 
 describe('fetchUserProfile', () => {
   it('should return user profile data from API', async () => {
@@ -18,9 +17,10 @@ describe('fetchUserProfile', () => {
         return fakeUser;
       },
     };
+    const mockUserService = userService(mockHttpClient);
 
     // Act
-    const result = await fetchUserProfile(1, mockHttpClient);
+    const result = await mockUserService.fetchUserProfile(1);
 
     // Assert
     expect(result).toEqual(fakeUser);
@@ -28,7 +28,6 @@ describe('fetchUserProfile', () => {
 });
 
 //Add isUserSameOrganize test
-
 describe('isUserSameOrganize', () => {
   const mockUser: UserProfile = {
     id: 1,
@@ -47,7 +46,8 @@ describe('isUserSameOrganize', () => {
   });
 });
 
-describe('getUserSameOrganizeNest', () => {
+//getUserSameOrganizeNest
+describe('getUserSameOrganize', () => {
   const mockUser: UserProfile = {
     id: 1,
     name: 'Leanne Graham',
@@ -60,7 +60,9 @@ describe('getUserSameOrganizeNest', () => {
       get: async () => mockUser,
     };
 
-    const result = await getUserSameOrganizeNest(1, mockHttpClient);
+    const mockUserService = userService(mockHttpClient);
+
+    const result = await mockUserService.getUserSameOrganize(1);
     expect(result).toEqual(mockUser);
   });
 
@@ -70,8 +72,10 @@ describe('getUserSameOrganizeNest', () => {
     const mockHttpClient: HttpClient = {
       get: async () => fakeUser,
     };
+    
+    const mockUserService = userService(mockHttpClient);
 
-    await expect(getUserSameOrganizeNest(1, mockHttpClient)).rejects.toThrow(
+    await expect(mockUserService.getUserSameOrganize(1)).rejects.toThrow(
       'User does not belong to the specified organization'
     );
   });
