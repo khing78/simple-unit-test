@@ -59,11 +59,15 @@ describe('getUserSameOrganize', () => {
     email: 'Sincere@april.biz',
   };
 
-  it('should return user if user is in the same organization', async () => {
-    const mockHttpClient: HttpClient = {
-      get: async () => mockUser,
-    };
+  let mockHttpClient: HttpClient;
 
+  beforeEach(() => {
+    mockHttpClient = {
+      get: jest.fn().mockResolvedValue(mockUser),
+    };
+  });
+
+  it('should return user if user is in the same organization', async () => {
     const mockUserService = userService(mockHttpClient);
 
     const result = await mockUserService.getUserSameOrganize(1);
@@ -72,10 +76,7 @@ describe('getUserSameOrganize', () => {
 
   it('should throw error if user is not in the same organization', async () => {
     const fakeUser = { ...mockUser, email: 'someone@other.org' };
-
-    const mockHttpClient: HttpClient = {
-      get: async () => fakeUser,
-    };
+    mockHttpClient.get = jest.fn().mockResolvedValue(fakeUser);
 
     const mockUserService = userService(mockHttpClient);
 

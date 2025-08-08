@@ -1,4 +1,13 @@
-import { calculateWorkScore, MAX_WORK_SCORE, calculateMidtermScore, MAX_MIDTERM_SCORE, calculateFinalExamScore, MAX_FINAL_SCORE, getLetterGrade, calculateFinalGrade } from "../../src/grade/grade";
+import {
+  calculateWorkScore,
+  MAX_WORK_SCORE,
+  calculateMidtermScore,
+  MAX_MIDTERM_SCORE,
+  calculateFinalExamScore,
+  MAX_FINAL_SCORE,
+  getLetterGrade,
+  calculateFinalGrade,
+} from '../../src/grade/grade';
 
 // tests/grade.test.ts
 describe('calculateWorkScore', () => {
@@ -67,27 +76,23 @@ describe('getLetterGrade', () => {
 
 describe('calculateFinalGrade', () => {
   it('should return A for full score', () => {
-    expect(
-      calculateFinalGrade({ work: 20, midterm: 30, final: 50 })
-    ).toBe('A');
+    expect(calculateFinalGrade({ work: 20, midterm: 30, final: 50 })).toBe('A');
   });
 
   it('should return C for medium score', () => {
-    expect(
-      calculateFinalGrade({ work: 10, midterm: 20, final: 30 })
-    ).toBe('C');
+    expect(calculateFinalGrade({ work: 10, midterm: 20, final: 30 })).toBe('C');
   });
 
   it('should clamp scores over max and return A', () => {
-    expect(
-      calculateFinalGrade({ work: 999, midterm: 999, final: 999 })
-    ).toBe('A');
+    expect(calculateFinalGrade({ work: 999, midterm: 999, final: 999 })).toBe(
+      'A'
+    );
   });
 
   it('should handle negative scores and return F', () => {
-    expect(
-      calculateFinalGrade({ work: -10, midterm: -20, final: -30 })
-    ).toBe('F');
+    expect(calculateFinalGrade({ work: -10, midterm: -20, final: -30 })).toBe(
+      'F'
+    );
   });
 
   it('should return correct grade near boundary', () => {

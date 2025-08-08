@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\" \"tests/**/*.{ts,tsx,js,jsx}\""
   },
   "keywords": [],
   "author": "",
@@ -13,6 +14,7 @@
     "@types/axios": "^0.9.36",
     "@types/jest": "^30.0.0",
     "jest": "^30.0.5",
+    "prettier": "^3.6.2",
     "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"

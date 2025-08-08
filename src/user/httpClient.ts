@@ -1,6 +1,5 @@
-import axios from "axios";
-import { HttpClient } from "./types";
-
+import axios from 'axios';
+import { HttpClient } from './types';
 
 export const axiosHttpClient: HttpClient = {
   get: async (url: string) => {
