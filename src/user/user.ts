@@ -1,4 +1,3 @@
-import { axiosHttpClient } from './httpClient';
 import { HttpClient } from './types';
 /**
  * Fetches user profile data from the API.
