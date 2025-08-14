@@ -5,7 +5,7 @@ import {
   divide,
   isEven,
   addToAllInPlace,
-} from '../../src/math/math';
+} from '../../../src/answers/math/math';
 
 describe('math.ts', () => {
   describe('add', () => {

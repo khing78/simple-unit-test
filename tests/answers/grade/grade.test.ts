@@ -7,7 +7,7 @@ import {
   MAX_FINAL_SCORE,
   getLetterGrade,
   calculateFinalGrade,
-} from '../../src/grade/grade';
+} from '../../../src/answers/grade/grade';
 
 // tests/grade.test.ts
 describe('calculateWorkScore', () => {
