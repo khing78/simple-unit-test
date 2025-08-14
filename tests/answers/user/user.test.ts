@@ -1,9 +1,9 @@
-import { HttpClient } from '../../../src/answers/user/types';
+import { HttpClient } from '../../../src/user/types';
 import {
   userService,
   UserProfile,
   isUserSameOrganize,
-} from '../../../src/answers/user/user';
+} from '../../../src/user/user';
 
 describe('fetchUserProfile', () => {
   it('should return user profile data from API', async () => {
